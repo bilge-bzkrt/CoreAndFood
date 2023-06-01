@@ -1,0 +1,34 @@
+﻿@model List<CoreAndFood.Data.Models.Food>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Food List</h1>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>Food ID</th>
+        <th>Food Name</th>
+        <th>Food Stock</th>
+        <th>Category Name</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Details</th>
+    </tr>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <th>@x.FoodID</th>
+            <td>@x.Name</td>
+            <td>@x.Stock</td>
+            <td>@x.Category.CategoryName</td>
+            <td><a href="/Food/FoodDelete/@x.FoodID" class="btn btn-danger">Delete</a></td>
+            <td><a href="/Food/FoodGet/@x.FoodID" class="btn btn-success">Update</a></td>
+            <td><a href="/Food/FoodDatails/@x.FoodID" class="btn btn-info">Datails</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Food/FoodAdd" class="btn btn-primary">New Food</a>
