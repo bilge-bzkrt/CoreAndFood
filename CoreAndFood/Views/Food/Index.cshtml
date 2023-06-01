@@ -1,4 +1,6 @@
-﻿@model List<CoreAndFood.Data.Models.Food>
+﻿@using X.PagedList; @*sayfalama için 1. adım.*@
+@using X.PagedList.Mvc.Core;@* sayfalama için 1. adım.*@
+@model IPagedList<CoreAndFood.Data.Models.Food>
 
 @{
     ViewData["Title"] = "Index";
@@ -30,5 +32,5 @@
         </tr>
     }
 </table>
-
+@Html.PagedListPager((IPagedList)Model, page=>Url.Action("Index", new{page}))  @*sayfalama için 3. adım.*@
 <a href="/Food/FoodAdd" class="btn btn-primary">New Food</a>
