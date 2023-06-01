@@ -1,5 +1,6 @@
 ﻿using CoreAndFood.Data.Models;
 using CoreAndFood.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreAndFood.Controllers
@@ -7,9 +8,8 @@ namespace CoreAndFood.Controllers
     public class CategoryController : Controller
     {
         CategoryRepository categoryRepository = new CategoryRepository();
-        Context c = new Context();
-
-        public IActionResult Index()
+		//[Authorize] Login 3. Adım. kaldırıyoruz tüm sayfa , metotlarda ortak kullanılması için başka yöntem yazacağız. 
+		public IActionResult Index()
         {
             return View(categoryRepository.TList());
         }

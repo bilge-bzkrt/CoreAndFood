@@ -1,5 +1,6 @@
 ﻿using CoreAndFood.Data.Models;
 using CoreAndFood.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -10,11 +11,12 @@ namespace CoreAndFood.Controllers
 {
     public class FoodController : Controller
     {
-        FoodRepository foodRepository = new FoodRepository();
+		FoodRepository foodRepository = new FoodRepository();
         Context c = new Context();
-        public IActionResult Index(int page=1)
+
+		public IActionResult Index(int page=1)
         {
-            return View(foodRepository.TList("Category").ToPagedList(page,2)); //sayfalama için 1. adım.
+            return View(foodRepository.TList("Category").ToPagedList(page,3)); //sayfalama için 1. adım.
         }
 
         [HttpGet]
