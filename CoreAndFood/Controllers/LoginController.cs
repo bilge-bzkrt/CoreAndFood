@@ -2,6 +2,7 @@
 
 using CoreAndFood.Data.Models;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -37,6 +38,13 @@ namespace CoreAndFood.Controllers
 				return RedirectToAction("Index", "Category"); //category içindeki index actionuna yönlendir.
 			}
 			return View();
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> LogOut()
+		{
+			await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+			return RedirectToAction("Index", "Login");
 		}
 	}
 }
