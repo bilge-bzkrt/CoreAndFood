@@ -3,10 +3,11 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Core and Food Projesi</title>
+	<title>Core and Food Kategori Detay</title>
 	<!-- for-mobile-apps -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -150,9 +151,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- top-brands -->
 	<div class="top-brands">
 		<div class="container">
+			@*<h1>Taşınan id: @ViewBag.x</h1>*@
 			<h3>Ürünlerimiz</h3>
-			@await Component.InvokeAsync("FoodGetList")
-			@RenderBody()
+			@await Component.InvokeAsync("FoodListByCategory", new{id=@ViewBag.x})
 		</div>
 	</div>
 	<!-- //footer -->

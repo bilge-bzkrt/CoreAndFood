@@ -9,8 +9,13 @@ namespace CoreAndFood.Controllers
     {
         CategoryRepository categoryRepository = new CategoryRepository();
 		//[Authorize] Login 3. Adım. kaldırıyoruz tüm sayfa , metotlarda ortak kullanılması için başka yöntem yazacağız. 
-		public IActionResult Index()
+		public IActionResult Index(string p)
         {
+            if (!string.IsNullOrEmpty(p))
+            {
+                //return View(categoryRepository.List(x=>x.CategoryName==p));
+                return View(categoryRepository.List(x => x.CategoryName.Contains(p)));
+            }
             return View(categoryRepository.TList());
         }
         [HttpGet]

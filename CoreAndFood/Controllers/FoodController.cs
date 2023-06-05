@@ -3,7 +3,9 @@ using CoreAndFood.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using X.PagedList;
 
@@ -32,9 +34,24 @@ namespace CoreAndFood.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult FoodAdd(Food p)
+        public IActionResult FoodAdd(UrunEkle p)
         {
-            foodRepository.TAdd(p);
+            Food f = new Food();
+            if (p.ImageURL != null)
+            {
+                var extension = Path.GetExtension(p.ImageURL.FileName);
+                var newimagename = Guid.NewGuid()+ extension;
+                var location = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Resimler/", newimagename);
+                var stream = new FileStream(location, FileMode.Create);
+                p.ImageURL.CopyTo(stream);
+                f.ImageURL = newimagename;
+            }
+            f.Name = p.Name;
+            f.Description = p.Description;
+            f.Price = p.Price;
+            f.CategoryID = p.CategoryID;
+            f.Stock = p.Stock;
+            foodRepository.TAdd(f);
             return RedirectToAction("Index"); //SaveChanges gerek yok! Bunu Repository otomatik sağlayacak.
         }
 
